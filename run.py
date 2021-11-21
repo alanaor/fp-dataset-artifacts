@@ -46,6 +46,8 @@ def main():
                       help='Limit the number of examples to train on.')
     argp.add_argument('--max_eval_samples', type=int, default=None,
                       help='Limit the number of examples to evaluate on.')
+    argp.add_argument('--do_checklist', type=bool, default=False,
+                      help="This is the bool which specifies whether to run checklist tests on the dataset")
 
     training_args, args = argp.parse_args_into_dataclasses()
 
@@ -108,6 +110,9 @@ def main():
             num_proc=NUM_PREPROCESSING_WORKERS,
             remove_columns=eval_dataset.column_names
         )
+    
+    if training_args.do_checklist:
+        print('this worked')
 
     # Select the training configuration
     trainer_class = Trainer
